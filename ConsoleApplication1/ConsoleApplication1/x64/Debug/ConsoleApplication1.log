@@ -1,3 +1,4 @@
 ﻿  ConsoleApplication1.cpp
-C:\Users\PREDATOR\Documents\GitHub\TDConsole\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(125,7): warning C4551: function call missing argument list
+C:\Users\PREDATOR\Documents\GitHub\TDConsole\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(129,7): warning C4551: function call missing argument list
+C:\Users\PREDATOR\Documents\GitHub\TDConsole\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(371,12): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
   ConsoleApplication1.vcxproj -> C:\Users\PREDATOR\Documents\GitHub\TDConsole\ConsoleApplication1\x64\Debug\ConsoleApplication1.exe

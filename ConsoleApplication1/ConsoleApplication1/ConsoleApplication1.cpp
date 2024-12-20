@@ -33,6 +33,7 @@ void UpdateEnemies();
 int RandomNumber(int min, int max);
 void CreateEnemy(int x, int y, int speed, int hp);
 void FireWeapon(int explosionSize);
+float Distance(int x1, int x2);
 
 // classes
 
@@ -296,16 +297,17 @@ void FireWeapon(int explosionSize)
 			{
 				for (int i = 0; i < enemies.size(); i++)
 				{
-					if (sqrt((enemies.at(i).posX ^ 2) + (enemies.at(i).posY ^ 2)) < sqrt((enemies.at(nearestEnemy).posX ^ 2) + (enemies.at(nearestEnemy).posY ^ 2)))
+
+					if (sqrt((Distance(enemies.at(i).posX, sizeX / 2 - 1) * (Distance(enemies.at(i).posX, sizeX / 2 - 1)) + (Distance(enemies.at(i).posY, sizeY / 2 - 1) * 2) * Distance(enemies.at(i).posY, sizeY / 2 - 1)) < sqrt((Distance(enemies.at(nearestEnemy).posX, sizeX / 2 - 1) * (Distance(enemies.at(nearestEnemy).posX, sizeX / 2 - 1)) + (Distance(enemies.at(nearestEnemy).posY, sizeY / 2 - 1) * 2) * Distance(enemies.at(nearestEnemy).posY, sizeY / 2 - 1)))))
 					{
 						nearestEnemy = i;
 					}
 				}
 			}
-			explosionX = enemies.at(nearestEnemy).posX;
-			explosionY = enemies.at(nearestEnemy).posY;
 
 			//explosion
+			explosionX = enemies.at(nearestEnemy).posX;
+			explosionY = enemies.at(nearestEnemy).posY;
 
 			int arstX = explosionX - explosionSize;
 			int arstY = explosionY - explosionSize;
@@ -331,18 +333,40 @@ void FireWeapon(int explosionSize)
 
 			for (int i = 0; i < explosionSize; i++)
 			{
+				for (int t = 0; t < 2; t++)
+				{
 					for (int y = arstY; y < aretY; y++)
 					{
 						for (int x = arstX; x < aretX; x++)
 						{
-							if (sqrt((enemies.at(i).posX ^ 2) + (enemies.at(i).posY ^ 2)) < i)
+							if (sqrt((Distance(explosionX, x) * Distance(explosionX, x)) + sqrt((Distance(explosionY, y) * Distance(explosionY, y)))) < i)
+							{
+								display[y][x] = '+';
+							}
 						}
 					}
-
-				fireCount--;
-				Sleep(50);
+					Sleep(30);
+					for (int y = arstY; y < aretY; y++)
+					{
+						for (int x = arstX; x < aretX; x++)
+						{
+							if (sqrt((Distance(explosionX, x) * Distance(explosionX, x)) + sqrt((Distance(explosionY, y) * Distance(explosionY, y)))) < i)
+							{
+								display[y][x] = ' ';
+							}
+						}
+					}
+				}
 			}
+
+			fireCount--;
+			Sleep(50);
 		}
 		Sleep(33);
 	}
+}
+
+float Distance(int x1, int x2)
+{
+	return abs(x1 - x2);
 }
